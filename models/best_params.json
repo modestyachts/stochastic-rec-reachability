@@ -1,0 +1,98 @@
+{
+    "lastfm-360k": {
+        "EASE": {
+            "average_metric": 18.509014880547515,
+            "binarize": false,
+            "lam": 489.18562235418364
+        },
+        "KNN": {
+            "average_metric": 1.8677719862716953,
+            "neighborhood_size": 2000,
+            "shrinkage": 300.0
+        },
+        "LibFM": {
+            "average_metric": 1.1222437238961172,
+            "learning_rate": 0.04777777777777778,
+            "reg": 0.2277777777777778
+        }
+    },
+    "mind_aggregate_small_dev_cat": {
+        "LibFM": {
+            "average_metric": 0.31368984182716886,
+            "learning_rate": 0.07333333333333333,
+            "reg": 0.1
+        }
+    },
+    "mind_aggregate_small_dev_subcat": {
+        "LibFM": {
+            "average_metric": 0.15110444023306124,
+            "learning_rate": 0.09,
+            "reg": 0.03727593720314938
+        }
+    },
+    "mind_aggregate_small_train_cat": {
+        "LibFM": {
+            "average_metric": 0.2924588167744352,
+            "learning_rate": 0.10444444444444444,
+            "reg": 0.1
+        }
+    },
+    "mind_aggregate_small_train_subcat": {
+        "LibFM": {
+            "average_metric": 0.13592059606169557,
+            "learning_rate": 0.07,
+            "reg": 0.0517947467923121
+        }
+    },
+    "ml-100k": {
+        "EASE": {
+            "average_metric": 7.108472012124218,
+            "binarize": false,
+            "lam": 8138.161719423082
+        },
+        "KNN": {
+            "average_metric": 0.8427438137725867,
+            "neighborhood_size": 80,
+            "shrinkage": 0.0
+        },
+        "LibFM": {
+            "average_metric": 0.8704789622444609,
+            "learning_rate": 0.008466666666666667,
+            "reg": 0.12589254117941673
+        }
+    },
+    "ml-1m": {
+        "EASE": {
+            "average_metric": 7.001319107741664,
+            "binarize": false,
+            "lam": 19008.47904698387
+        },
+        "KNN": {
+            "average_metric": 0.7559125697590623,
+            "neighborhood_size": 100,
+            "shrinkage": 22.22222222222222
+        },
+        "LibFM": {
+            "average_metric": 0.7164871201373719,
+            "learning_rate": 0.011222222222222224,
+            "reg": 0.06812920690579612
+        }
+    },
+    "youtube": {
+        "EASE": {
+            "average_metric": 24.552296035582064,
+            "binarize": false,
+            "lam": 297.63514416313194
+        },
+        "KNN": {
+            "average_metric": 23.023462963932314,
+            "neighborhood_size": 30,
+            "shrinkage": 0
+        },
+        "LibFM": {
+            "average_metric": 2.1345542064312313,
+            "learning_rate": 0.057777777777777775,
+            "reg": 1.2915496650148827e-05
+        }
+    }
+}
