@@ -8,11 +8,6 @@ import time
 from config import MODELPATH
 from helper_utils import get_seen_mask, nlargest_indices
 
-# TODO: add reclab as submodule or default to pip installable version of reclab
-import sys
-sys.path.append(os.path.join(os.path.expanduser("~"), 'recsys/recsys-eval/'))
-sys.path.append(os.path.join(os.path.expanduser("~"), 'recsys/RecLab/'))
-sys.path.append('/Users/mcurmei/Documents/recsys/recsys-eval')
 from reclab.recommenders import LibFM, KNNRecommender
 from reclab.recommenders.sparse import EASE
 from reclab import data_utils
@@ -75,7 +70,7 @@ def extract_model_parameters(recommender):
         else:
             user_biases = np.zeros(n_user)
         user_factors = factors[user_indices]
-        
+
         # select the info of items
         item_indices = np.arange(n_user, n_item+n_user)
         if use_one_way:

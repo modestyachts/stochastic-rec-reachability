@@ -11,10 +11,6 @@ from scipy.sparse import csr_matrix, dok_matrix
 from scipy.stats import skewnorm
 from time import time
 
-# TODO remove once pip installable
-import sys
-sys.path.append(os.path.join(os.path.expanduser("~"), 'recsys/recsys-eval/'))
-sys.path.append(os.path.join(os.path.expanduser("~"), 'recsys/RecLab/'))
 from reclab import data_utils
 from reclab.recommenders import LibFM, KNNRecommender
 from reclab.recommenders.sparse import EASE
