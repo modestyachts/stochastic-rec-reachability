@@ -6,6 +6,7 @@ import itertools
 import json
 import numpy as np
 import os
+import pandas as pd
 import pickle
 import re
 from scipy.sparse import csr_matrix
@@ -612,6 +613,47 @@ def run_dataset_nextk_experiment(env,
                     run_time = toc-tic
 
                     print("\t\t\tBeta: {}; Runtime: {:.2f} min".format(beta, run_time/60))
+
+def make_combined_experiment_df(exp_list):
+    """Makes a dataframe from a list of experiments
+    merging together the reachability metrics for experiments
+    for different betas.
+
+    Parameters
+    ----------
+    exp_list : list of dict
+        list of experimental results
+        typically from load_dataset_experiment()
+
+    Returns
+    -------
+    combined_df: pandas.df
+        dataframe containing the merged results for all betas in 'melt' format
+        (long matrix)
+    """
+    relevant_info = ['baseline_rho_mat', 'max_rho_mat', 'baseline_rank_mat', 'max_rank_mat']
+    all_exp_df_array = []
+    for exp_dict in exp_list:
+        action_count = exp_dict['action_count']
+        beta = exp_dict['beta']
+        user_item_pairs =  list(get_non_zero_entries(exp_dict['max_rank_mat'], how = 'zip'))
+        exp_df = pd.DataFrame(user_item_pairs, columns=['User', 'Item'])
+        exp_df['beta'] = beta
+        exp_df['action_count'] = action_count
+        for info in relevant_info:
+            if info in exp_dict.keys():
+                info_list = [exp_dict[info][pair] for pair in user_item_pairs]
+                exp_df[info] = info_list
+
+        exp_df['lift'] = exp_df['max_rho_mat']/exp_df['baseline_rho_mat']
+        exp_df['gain'] = exp_df['max_rho_mat']-exp_df['baseline_rho_mat']
+        exp_df['rank_gain'] = exp_df['baseline_rank_mat'] - exp_df['max_rank_mat']
+        all_exp_df_array.append(exp_df)
+
+    # concatenate all the dataframes
+    concat_df = pd.concat(all_exp_df_array)
+    return concat_df.reset_index()
+
 
 def load_dataset_experiment(dataset_name='ml-100k',
                            recommender_model='libfm',

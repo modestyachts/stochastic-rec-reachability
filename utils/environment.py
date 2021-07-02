@@ -12,7 +12,8 @@ from scipy.stats import skewnorm
 from time import time
 
 from reclab import data_utils
-from reclab.recommenders import LibFM, KNNRecommender
+from reclab.recommenders import KNNRecommender
+from reclab.recommenders.libfm import LibFM
 from reclab.recommenders.sparse import EASE
 
 from config import DATAPATH, MODELPATH
@@ -507,9 +508,8 @@ class MIND(RatingEnvironment):
         try:
             self.load_data(history=history, non_click=non_click, attributes = attributes)
         except FileNotFoundError as e:
-            raise FileNotFoundError(e, "You must download MIND data " +
-                  "https://msnews.github.io/#about-mind",
-                  str(filename))
+            raise FileNotFoundError(e, "You must first download MIND data " +
+                  "Run utils/get_mind_data.py")
         if recommender_model is not None:
             self.attach_recommender(recommender_model, **train_params)
             if save == True:
