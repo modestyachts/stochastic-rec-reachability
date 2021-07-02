@@ -57,11 +57,12 @@ def make_common_columns_mask(available_mask, nrow = None, ncol = None, count = N
         nrow, _ = available_mask.shape
     if active_rows is None:
         active_rows = np.arange(nrow)
-    available_column_mask = np.zeros(ncol, dtype=bool)
-    row_ids, col_ids = available_mask.nonzero()
-    available_columns = list(set([col for i, col in enumerate(col_ids) if row_ids[i] in active_rows]))
-    available_column_mask[available_columns] = False
-    sampled_columns = r.choice(np.arange(ncol)[available_column_mask], count, replace=False)
+    available_entries = get_non_zero_entries(available_mask, how = "row")
+    available_col_set_list = []
+    for row_id in active_rows:
+        available_col_set_list.append(set(available_entries[row_id]))
+    common_available_columns = list(set.intersection(*available_col_set_list))
+    sampled_columns = r.choice(common_available_columns, count, replace=False)
     row_ids = list(itertools.chain.from_iterable(itertools.repeat(i, len(sampled_columns)) for i in active_rows))
     col_ids = list(sampled_columns)*len(active_rows)
     mask = csr_matrix(([True]*len(row_ids), (row_ids, col_ids)), shape = (nrow, ncol))
