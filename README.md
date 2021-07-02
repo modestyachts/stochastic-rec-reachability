@@ -15,7 +15,7 @@ Then running `pip install -r requirements.txt` is sufficient to install the rema
 
 ## Getting Started
 
-For an example of how reachability can be computed in a toy setting, see [`Reachability Demo.ipynb`](Reachability\ Demo.ipynb).
+For an example of how reachability can be computed in a toy setting, see [`Reachability Demo.ipynb`](Reachability%20Demo.ipynb).
 
 ## Reproducing Experiments
 
